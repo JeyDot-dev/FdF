@@ -12,27 +12,27 @@
 #	   | |                   | |     #
 #	   |_|                   |_|     #
 #/''''''''''''''''''''''''''''''''''\#	   
-Name		=	fdf
+NAME		=	fdf
 
-Src			=	fdf.c
-Objs 		=	${SRC:.c=.o}
+SRC			=	fdf.c
+OBJS 		=	${SRC:.c=.o}
 
-INCS 		=	./libft		./mlx
+INCS 		=	libft		mlx
 HEADERS		=	${addprefix -I,${INCS}}
 LIB_DIR		=	${addprefix -L,${INCS}}
 LIBS		=	-lft -lmlx
 
 FRAMEWORKS	=	OpenGL	AppKit
 FS			=	${addprefix -framework ,${FRAMEWORKS}}
+CFLAGS		=	-Wextra -Werror -Wall
 
 RM			=	rm -rf
 CC			=	gcc
 
-CFLAGS		=	-Wextra -Werror -Wall
 #--------------------------------------------------------------------------------
 
 %.o		:	%.c
-			${CC} ${CFLAGS} ${HEADERS} -c $< -o %@
+			${CC} ${CFLAGS} ${HEADERS} -c $< -o $@
 
 all		:	${NAME}
 
@@ -40,18 +40,17 @@ ${NAME}	:	${OBJS} complib
 			${CC} ${OBJS} ${LIB_DIR} ${LIBS} ${FS} -o ${NAME}
 
 complib	:
-			make -C ./libft all
-			make -C ./mlx all
+			@${MAKE} -s -C libft
+			@${MAKE} -s -C mlx
 
 clean	:	
 			${RM} ${OBJS}
-			make -C ./libft clean
-			make -C ./mlx clean
+			@${MAKE} -s -C ./libft clean
+			@${MAKE} -s -C ./mlx clean
 
-fclean	:	
-			clean
+fclean	:	clean	
 			${RM} ${NAME} ./mlx/libmlx.a
-			make -C ./libft fclean
+			${MAKE} -C ./libft fclean
 
 re		:	fclean all
 
