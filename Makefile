@@ -13,7 +13,7 @@
 #/''''''''''''''''''''''''''''''''''\#	   
 NAME		=	fdf
 
-SRC			=	fdf.c
+SRC			=	fdf.c	draw_line.c
 OBJS 		=	${SRC:.c=.o}
 
 INCS 		=	libft		mlx
@@ -35,7 +35,7 @@ CC			=	gcc
 
 all		:	${NAME}
 
-${NAME}	:	${OBJS} complib
+${NAME}	:	complib ${OBJS}
 			${CC} ${OBJS} ${LIB_DIR} ${LIBS} ${FS} -o ${NAME}
 
 complib	:

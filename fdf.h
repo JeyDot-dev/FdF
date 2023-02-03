@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/02 15:52:05 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:32:01 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,7 @@ typedef struct s_coordinate{
 	int	y;
 	int	y2;
 }				t_coordinate;
+
+void	put_line(t_imgdata *img, t_coordinate pts, int color);
+void	my_pixel_put(t_imgdata *img, int x, int y, int color);
 #endif
