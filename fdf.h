@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/03 16:32:01 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/04 12:11:20 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 # include "libft.h"
 # include <mlx.h>
+# include <math.h>
 typedef struct s_imgdata{
 	void	*img;
 	char	*addr;
@@ -26,6 +27,8 @@ typedef struct s_coordinate{
 	int	x2;
 	int	y;
 	int	y2;
+	int	z;
+	int	z2;
 }				t_coordinate;
 
 void	put_line(t_imgdata *img, t_coordinate pts, int color);
