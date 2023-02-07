@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/05 17:16:44 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:25:46 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	my_pixel_put(t_imgdata *img, int x, int y, int color)
 }
 t_coordinate switch_pts(t_coordinate pts)
 {
-	int buffer;
+	int	buffer;
 
 	buffer = pts.x;
 	pts.x = pts.x2;
@@ -36,27 +36,31 @@ void	line_x(t_imgdata *img, t_coordinate pts, int color)
 	int	dy;
 	int	e;
 	int	dx;
-	int inc;
+	int inc[2];
 
 	dx = pts.x2 - pts.x;
 	dy = pts.y2 - pts.y;
-	inc = 1;
+	inc[0] = 1;
+	inc[1] = pts.x;
 	if (dy < 0)
 	{
-		inc = -1;
+		inc[0] = -1;
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
-	while (pts.x < pts.x2)
+	while (inc[1] <= pts.x2)
 	{
+		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
 		my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
-			pts.y += inc;
+			pts.y += inc[0];
 			e = e + (2 * (dy - dx));
 		}
 		else
 			e = e + 2 * dy;
+		pts.x += 1;
+		inc[1] += 1;
 	}
 }
 void	line_y(t_imgdata *img, t_coordinate pts, int color)
@@ -64,27 +68,32 @@ void	line_y(t_imgdata *img, t_coordinate pts, int color)
 	int	dy;
 	int	e;
 	int	dx;
-	int inc;
+	int inc[2];
 
 	dx = pts.x2 - pts.x;
 	dy = pts.y2 - pts.y;
-	inc = 1;
+	inc[0] = 1;
+	inc[1] = pts.y;
 	if (dx < 0)
 	{
-		inc = -1;
+		inc[0] = -1;
 		dx = -dx;
 	}
 	e = (2 * dx) - dy;
-	while (pts.y < pts.y2)
+	while (inc[1] <= pts.y2)
 	{
+		ft_printf("e = %i\n", e);
+		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
 		my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
-			pts.x += inc;
+			pts.x += inc[0];
 			e = e + (2 * (dx - dy));
 		}
 		else
 			e = e + 2 * dx;
+		pts.y += 1;
+		inc[1] += 1;
 	}
 }
 
@@ -95,16 +104,19 @@ void	put_line(t_imgdata *img, t_coordinate pts, int color)
 
 	dy = ft_abs(pts.y2 - pts.y);
 	dx = ft_abs(pts.x2 - pts.x);
-	if (dy <= dx)
+		ft_printf("dx = %i, dy = %i\n", dx, dy);
+	if (dy < dx)
 	{
 		if (pts.x > pts.x2)
-			switch_pts(pts);
+			pts = switch_pts(pts);
+								ft_printf("Lel\n");
 		line_x(img, pts, color);
 	}
 	else
 	{
 		if (pts.y > pts.y2)
-			switch_pts(pts);
+			pts = switch_pts(pts);
+								ft_printf("Lal\n");
 		line_y(img, pts, color);
 	}
 }

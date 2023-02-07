@@ -1,4 +1,4 @@
-double	ft_abs(double n)
+int	ft_abs(int n)
 {
 	if (n < 0)
 		n *= -1;

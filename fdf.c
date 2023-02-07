@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/05 16:32:16 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:53:49 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -31,10 +31,12 @@ int	rgbo_color(int r, int g, int b, int o)
 }
 t_coordinate to_isometric(t_coordinate pts)
 {
-	pts.x = round(pts.x + cos(0.523599) * pts.z);
-	pts.y = round(pts.y + sin(0.523599) * pts.z);
-	pts.x2 = round(pts.x2 + cos(0.523599) * pts.z2);
-	pts.y2 = round(pts.y2 + sin(0.523599) * pts.z2);
+	pts.x = round(pts.x + cos(90) * pts.z);
+	pts.y = round(pts.y + sin(90) * pts.z);
+	pts.x2 = round(pts.x2 + cos(90) * pts.z2);
+	pts.y2 = round(pts.y2 + sin(90) * pts.z2);
+	//pts.x = round(pts.x * cos(120) + pts.x * cos(120 + 2) + pts.z * cos(120 - 2));
+	//pts.y = round(pts.y * sin(120) + pts.x * sin(120 + 2) + pts.z * sin(120 - 2));
 	//pts.x2 = round(pts.x2 * cos(120) + pts.x2 * cos(120 + 2) + pts.z2 * cos(120 - 2));
 	//pts.y2 = round(pts.y2 * sin(120) + pts.x2 * sin(120 + 2) + pts.z2 * sin(120 - 2));
 	return (pts);
@@ -73,30 +75,119 @@ t_coordinate base_pt2(t_coordinate pts, int a, int b, int c)
 void ft_line_test(t_imgdata *img)
 {
 	t_coordinate	pts;
-	pts = base_pt1(1, 0, 0);
-	pts = base_pt2(pts, 0, 3, 0);
+	pts = base_pt1(0, 0, 0);
+	pts = base_pt2(pts, 1, 0, 0);
 	pts = base_pts(pts);
+	pts = to_isometric(pts);
 			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
 					pts.x, pts.y, pts.x2, pts.y2);
 	put_line(img, pts, rgbo_color(255, 0, 0, 0));
-	pts = base_pt1(1, 0, 0);
+	pts = base_pt1(0, 1, 0);
 	pts = base_pt2(pts, 1, 1, 0);
 	pts = base_pts(pts);
-			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
-					pts.x, pts.y, pts.x2, pts.y2);
-	put_line(img, pts, rgbo_color(255, 0, 0, 0));
-	pts = base_pt1(1, 1, 0);
-	pts = base_pt2(pts, 0, 1, 0);
-	pts = base_pts(pts);
+	pts = to_isometric(pts);
 			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
 					pts.x, pts.y, pts.x2, pts.y2);
 	put_line(img, pts, rgbo_color(255, 0, 0, 0));
 	pts = base_pt1(0, 0, 0);
 	pts = base_pt2(pts, 0, 1, 0);
 	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 255, 0, 0));
+	pts = base_pt1(1, 0, 0);
+	pts = base_pt2(pts, 1, 1, 0);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 255, 0, 0));
+	pts = base_pt1(0, 0, 0);
+	pts = base_pt2(pts, 1, 1, 0);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(255, 255, 0, 0));
+	pts = base_pt1(1, 0, 0);
+	pts = base_pt2(pts, 0, 1, 0);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(255, 255, 0, 0));
+	//--------------------
+	pts = base_pt1(0, 0, 1);
+	pts = base_pt2(pts, 1, 0, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
 			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
 					pts.x, pts.y, pts.x2, pts.y2);
 	put_line(img, pts, rgbo_color(255, 0, 0, 0));
+	pts = base_pt1(0, 1, 1);
+	pts = base_pt2(pts, 1, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(255, 0, 0, 0));
+	pts = base_pt1(0, 0, 1);
+	pts = base_pt2(pts, 0, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 255, 0, 0));
+	pts = base_pt1(1, 0, 1);
+	pts = base_pt2(pts, 1, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 255, 0, 0));
+	pts = base_pt1(0, 0, 1);
+	pts = base_pt2(pts, 1, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(255, 255, 0, 0));
+	pts = base_pt1(1, 0, 1);
+	pts = base_pt2(pts, 0, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(255, 255, 0, 0));
+	pts = base_pt1(0, 0, 0);
+	pts = base_pt2(pts, 0, 0, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 0, 255, 50));
+	pts = base_pt1(0, 1, 0);
+	pts = base_pt2(pts, 0, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 0, 255, 50));
+	pts = base_pt1(1, 0, 0);
+	pts = base_pt2(pts, 1, 0, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 0, 255, 50));
+	pts = base_pt1(1, 1, 0);
+	pts = base_pt2(pts, 1, 1, 1);
+	pts = base_pts(pts);
+	pts = to_isometric(pts);
+			ft_printf("Line : x=%i, y=%i, x2=%i, y2=%i\n",
+					pts.x, pts.y, pts.x2, pts.y2);
+	put_line(img, pts, rgbo_color(0, 0, 255, 50));
 }
 /*void	ft_cube(t_imgdata img)
 {
