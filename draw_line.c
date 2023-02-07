@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/07 11:25:46 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:01:00 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void	line_x(t_imgdata *img, t_coordinate pts, int color)
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
+				ft_printf("First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.x2)
 	{
-		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
+//		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
 		my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
@@ -62,6 +63,7 @@ void	line_x(t_imgdata *img, t_coordinate pts, int color)
 		pts.x += 1;
 		inc[1] += 1;
 	}
+				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 void	line_y(t_imgdata *img, t_coordinate pts, int color)
 {
@@ -80,10 +82,10 @@ void	line_y(t_imgdata *img, t_coordinate pts, int color)
 		dx = -dx;
 	}
 	e = (2 * dx) - dy;
+				ft_printf("First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.y2)
 	{
-		ft_printf("e = %i\n", e);
-		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
+				//ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
 		my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
@@ -95,28 +97,28 @@ void	line_y(t_imgdata *img, t_coordinate pts, int color)
 		pts.y += 1;
 		inc[1] += 1;
 	}
+				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
 void	put_line(t_imgdata *img, t_coordinate pts, int color)
 {
 	int	dy;
 	int	dx;
-
 	dy = ft_abs(pts.y2 - pts.y);
 	dx = ft_abs(pts.x2 - pts.x);
-		ft_printf("dx = %i, dy = %i\n", dx, dy);
+								//ft_printf("dx = %i, dy = %i\n", dx, dy);
 	if (dy < dx)
 	{
 		if (pts.x > pts.x2)
 			pts = switch_pts(pts);
-								ft_printf("Lel\n");
+								ft_printf("Line-X\n");
 		line_x(img, pts, color);
 	}
 	else
 	{
 		if (pts.y > pts.y2)
 			pts = switch_pts(pts);
-								ft_printf("Lal\n");
+								ft_printf("Line-Y\n");
 		line_y(img, pts, color);
 	}
 }
