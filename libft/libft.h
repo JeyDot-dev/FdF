@@ -6,7 +6,7 @@
 /*   By: jsousa-a <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:01:49 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/05 17:14:40 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:02:56 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ char	*g_calloc(int ct);
 int		g_strlen(char *str);
 int		g_check_n(char *str);
 char	*get_next_line(int fd);
+//****MLX***
 #endif

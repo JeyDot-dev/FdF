@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/05 16:16:22 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:03:19 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_coordinate{
 	int	z2;
 }				t_coordinate;
 
-void	put_line(t_imgdata *img, t_coordinate pts, int color);
-void	my_pixel_put(t_imgdata *img, int x, int y, int color);
+void			put_line(t_imgdata *img, t_coordinate pts, int color);
+void			my_pixel_put(t_imgdata *img, int x, int y, int color);
+void			ft_cube(t_imgdata *img);
+t_coordinate	to_isometric(t_coordinate pts);
 #endif
