@@ -6,12 +6,12 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/08 15:07:58 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:28:16 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
 //t_imgdata .img .addr .bpp .line_len .endian
-//t_coordinate .x .x2 .y .y2 .z .z2
+//t_line_coordinates .x .x2 .y .y2 .z .z2
 
 
 

@@ -16,9 +16,9 @@ int	rgbo_color(int r, int g, int b, int o)
 	color |= o << 24;
 	return (color);
 }
-t_coordinate base_pts(t_coordinate pts)
+t_line_coordinates base_pts(t_line_coordinates pts)
 {
-	int inc = 60;
+	int inc = 130;
 
 	pts.x = inc * pts.x;
 	pts.y = inc * pts.y;
@@ -29,7 +29,7 @@ t_coordinate base_pts(t_coordinate pts)
 	return (pts);
 }
 
-t_coordinate origin_pts(t_coordinate pts)
+t_line_coordinates origin_pts(t_line_coordinates pts)
 {
 	int base_x = 1920 / 2;
 	int base_y = 1080 / 2;
@@ -41,16 +41,16 @@ t_coordinate origin_pts(t_coordinate pts)
 	return (pts);
 }
 
-t_coordinate base_pt1(int a, int b, int c)
+t_line_coordinates base_pt1(int a, int b, int c)
 {
-	t_coordinate	pts;
+	t_line_coordinates	pts;
 	pts.x = a;
 	pts.y = b;
 	pts.z = c;
 	return (pts);
 }
 
-t_coordinate base_pt2(t_coordinate pts, int a, int b, int c)
+t_line_coordinates base_pt2(t_line_coordinates pts, int a, int b, int c)
 {
 	pts.x2 = a;
 	pts.y2 = b;
@@ -59,7 +59,7 @@ t_coordinate base_pt2(t_coordinate pts, int a, int b, int c)
 }
 void ft_cube(t_imgdata *img)
 {
-	t_coordinate	pts;
+	t_line_coordinates	pts;
 	pts = base_pt1(0, 0, 0);
 	pts = base_pt2(pts, 1, 0, 0);
 	pts = base_pts(pts);

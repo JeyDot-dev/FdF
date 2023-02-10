@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/07 14:01:00 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:28:13 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	my_pixel_put(t_imgdata *img, int x, int y, int color)
 	colordst = img->addr + (img->line_len * y + (img->bpp / 8) * x);
 	*(unsigned int *) colordst = color;
 }
-t_coordinate switch_pts(t_coordinate pts)
+t_line_coordinates switch_pts(t_line_coordinates pts)
 {
 	int	buffer;
 
@@ -31,7 +31,7 @@ t_coordinate switch_pts(t_coordinate pts)
 	pts.y2 = buffer;
 	return (pts);
 }
-void	line_x(t_imgdata *img, t_coordinate pts, int color)
+void	line_x(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int	dy;
 	int	e;
@@ -65,7 +65,7 @@ void	line_x(t_imgdata *img, t_coordinate pts, int color)
 	}
 				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
-void	line_y(t_imgdata *img, t_coordinate pts, int color)
+void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int	dy;
 	int	e;
@@ -100,7 +100,7 @@ void	line_y(t_imgdata *img, t_coordinate pts, int color)
 				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
-void	put_line(t_imgdata *img, t_coordinate pts, int color)
+void	put_line(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int	dy;
 	int	dx;
@@ -122,7 +122,7 @@ void	put_line(t_imgdata *img, t_coordinate pts, int color)
 		line_y(img, pts, color);
 	}
 }
-/*void put_line(t_imgdata *img, t_coordinate pts, int color)
+/*void put_line(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int dx;
 	int dy;
