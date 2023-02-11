@@ -13,7 +13,8 @@
 #/''''''''''''''''''''''''''''''''''\#	   
 NAME		=	fdf
 
-SRC			=	fdf.c	draw_line.c	tests.c	ft_isometric.c	parse_map.c
+SRC			=	fdf.c	draw_line.c	tests.c	ft_isometric.c	parse_map.c\
+				draw_map.c
 OBJS 		=	${SRC:.c=.o}
 
 INCS 		=	libft		mlx

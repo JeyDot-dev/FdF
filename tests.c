@@ -16,7 +16,7 @@ int	rgbo_color(int r, int g, int b, int o)
 	color |= o << 24;
 	return (color);
 }
-t_line_coordinates base_pts(t_line_coordinates pts)
+t_line_coordinates scale_pts(t_line_coordinates pts)
 {
 	int inc = 130;
 
