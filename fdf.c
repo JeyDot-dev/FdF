@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/10 17:37:22 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:19:25 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 		return (1);
 	fd = open(av[1], O_RDONLY);
 	pts = map_to_pts(fd);	
-	while(pts->next)
+	while(pts)
 	{
 		printf("--x = %i, y = %i, z = %i\n", pts->x, pts->y, pts->z);
 		pts = pts->next;

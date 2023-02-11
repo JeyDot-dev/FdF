@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:39:37 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/10 17:50:03 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:27:17 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,24 @@ void	fdf_lstadd_front(t_pts_coordinates **lst, t_pts_coordinates *new)
 	*lst = new;
 }
 
-void	add_pts_list(t_pts_coordinates **head, char *new_line, int first)
+void	add_pts_list(t_pts_coordinates **head, char *new_line)
 {
 	char	**split_line;
-	t_pts_coordinates	**top_list;
+	t_pts_coordinates	*top_list;
 	int		x;
 	int		y;
 
-	top_list = head;
+	top_list = *head;
 	x = 0;
 	y = 0;
 	split_line = ft_split(new_line, 32);
-	if (first == 1 && split_line[x])
-	{
-		fdf_lstadd_front(head, fdf_lstnew(x, y, ft_atoi(split_line[x])));
-		free((*head)->next);
-		x++;
-	}
-	else
+	if (*head != NULL)
 	{
 		y = 1;
-		while ((*top_list)->below)
+		while (top_list->below)
 		{
 			y++;
-			*top_list = (*top_list)->below;
+			top_list = top_list->below;
 		}
 	}
 	while (split_line[x])
@@ -88,35 +82,30 @@ void	add_pts_list(t_pts_coordinates **head, char *new_line, int first)
 		fdf_lstadd_back(head, fdf_lstnew(x, y, ft_atoi(split_line[x])));
 		if (y)
 		{
-			(*top_list)->below = fdf_lstlast(*head);
-			*top_list = (*top_list)->next;
+			top_list->below = fdf_lstlast(*head);
+			top_list = top_list->next;
 		}
 		x++;
 	}
-					ft_printf("End of add_pts, x=%i, y=%i", x, y);
-						ft_printf("LINE 74\n");
+					ft_printf("End of add_pts, x=%i, y=%i\n", x, y);
 }
 
 t_pts_coordinates	*map_to_pts(int fd)
 {
 	t_pts_coordinates	*head;
 //	int					i;
-	int					first;
 	char				*new_line;
 
-	head = malloc(sizeof(head));
-	if (!head)
-		return (NULL);
-	first = 1;
+	head = NULL;
 	while (1)
 	{
 		new_line = get_next_line(fd);
 		if (!new_line)
 			break;
-		add_pts_list(&head, new_line, first);
-		first = 0;
+		add_pts_list(&head, new_line);
 		free(new_line);
 	}
+						ft_printf("WOW\n");
 	return (head);
 }
 
