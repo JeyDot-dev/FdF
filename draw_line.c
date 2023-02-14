@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/09 15:28:13 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/14 16:52:57 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ void	line_x(t_imgdata *img, t_line_coordinates pts, int color)
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
-				ft_printf("First Pixel at %i, %i\n", pts.x, pts.y);
+				ft_printf("lX First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.x2)
 	{
-//		ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
-		my_pixel_put(img, pts.x, pts.y, color);
+				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
+		if(pts.x <= 1920 && pts.y <= 1080
+				&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
 			pts.y += inc[0];
@@ -82,11 +84,12 @@ void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
 		dx = -dx;
 	}
 	e = (2 * dx) - dy;
-				ft_printf("First Pixel at %i, %i\n", pts.x, pts.y);
+				ft_printf("lY First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.y2)
 	{
-				//ft_printf("Pixel at %i, %i\n", pts.x, pts.y);
-		my_pixel_put(img, pts.x, pts.y, color);
+		if(pts.x <= 1920 && pts.y <= 1080
+				&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, color);
 		if (e > 0)
 		{
 			pts.x += inc[0];
@@ -100,7 +103,7 @@ void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
 				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
-void	put_line(t_imgdata *img, t_line_coordinates pts, int color)
+void	draw_line(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int	dy;
 	int	dx;
