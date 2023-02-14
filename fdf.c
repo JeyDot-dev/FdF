@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/14 16:42:46 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/14 22:34:12 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -33,8 +33,10 @@ int	main(int ac, char **av)
 		return (1);
 	fd = open(av[1], O_RDONLY);
 	pts = map_to_pts(fd);
+	link_pts(pts);
 	scale_pts(pts);
 	origin_pts(pts);
+	altitude_color(pts);
 	to_isometric(pts);
 	draw_map(pts, &img);
 //	while(pts)
@@ -44,6 +46,7 @@ int	main(int ac, char **av)
 //	}
 
 //	ft_cube(&img);
+							ft_printf("AFTER DRAW_MAP\n");
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }

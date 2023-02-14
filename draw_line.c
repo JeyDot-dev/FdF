@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/14 16:52:57 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/14 22:28:51 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ t_line_coordinates switch_pts(t_line_coordinates pts)
 	pts.y2 = buffer;
 	return (pts);
 }
-void	line_x(t_imgdata *img, t_line_coordinates pts, int color)
+
+void	line_x(t_imgdata *img, t_line_coordinates pts)
 {
 	int	dy;
 	int	e;
@@ -48,13 +49,12 @@ void	line_x(t_imgdata *img, t_line_coordinates pts, int color)
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
-				ft_printf("lX First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.x2)
 	{
-				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
-		if(pts.x <= 1920 && pts.y <= 1080
-				&& pts.x >= 0 && pts.y >= 0)
-			my_pixel_put(img, pts.x, pts.y, color);
+//				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
+//		if(pts.x <= 1920 && pts.y <= 1080
+//				&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, pts.color);
 		if (e > 0)
 		{
 			pts.y += inc[0];
@@ -67,13 +67,14 @@ void	line_x(t_imgdata *img, t_line_coordinates pts, int color)
 	}
 				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
-void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
+
+void	line_y(t_imgdata *img, t_line_coordinates pts)
 {
 	int	dy;
 	int	e;
 	int	dx;
 	int inc[2];
-
+	
 	dx = pts.x2 - pts.x;
 	dy = pts.y2 - pts.y;
 	inc[0] = 1;
@@ -84,12 +85,11 @@ void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
 		dx = -dx;
 	}
 	e = (2 * dx) - dy;
-				ft_printf("lY First Pixel at %i, %i\n", pts.x, pts.y);
 	while (inc[1] <= pts.y2)
 	{
-		if(pts.x <= 1920 && pts.y <= 1080
-				&& pts.x >= 0 && pts.y >= 0)
-			my_pixel_put(img, pts.x, pts.y, color);
+//		if(pts.x <= 1920 && pts.y <= 1080
+//				&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, pts.color);
 		if (e > 0)
 		{
 			pts.x += inc[0];
@@ -103,7 +103,7 @@ void	line_y(t_imgdata *img, t_line_coordinates pts, int color)
 				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
-void	draw_line(t_imgdata *img, t_line_coordinates pts, int color)
+void	draw_line(t_imgdata *img, t_line_coordinates pts)
 {
 	int	dy;
 	int	dx;
@@ -115,16 +115,17 @@ void	draw_line(t_imgdata *img, t_line_coordinates pts, int color)
 		if (pts.x > pts.x2)
 			pts = switch_pts(pts);
 								ft_printf("Line-X\n");
-		line_x(img, pts, color);
+		line_x(img, pts);
 	}
 	else
 	{
 		if (pts.y > pts.y2)
 			pts = switch_pts(pts);
 								ft_printf("Line-Y\n");
-		line_y(img, pts, color);
+		line_y(img, pts);
 	}
 }
+
 /*void put_line(t_imgdata *img, t_line_coordinates pts, int color)
 {
 	int dx;
