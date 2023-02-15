@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/14 22:28:51 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:08:04 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ t_line_coordinates switch_pts(t_line_coordinates pts)
 	buffer = pts.y;
 	pts.y = pts.y2;
 	pts.y2 = buffer;
+	buffer = pts.color;
+	pts.color = pts.color2;
+	pts.color2 = buffer;
 	return (pts);
 }
 
@@ -49,12 +52,14 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
+			ft_printf("linX r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 	while (inc[1] <= pts.x2)
 	{
 //				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
 //		if(pts.x <= 1920 && pts.y <= 1080
 //				&& pts.x >= 0 && pts.y >= 0)
-			my_pixel_put(img, pts.x, pts.y, pts.color);
+		my_pixel_put(img, pts.x, pts.y, pts.color);
+		pts.color = smooth_colors(pts.color, pts.color2, pts.x2 - pts.x);
 		if (e > 0)
 		{
 			pts.y += inc[0];
@@ -65,7 +70,8 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 		pts.x += 1;
 		inc[1] += 1;
 	}
-				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
+			ft_printf("end r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
+//				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
 void	line_y(t_imgdata *img, t_line_coordinates pts)
@@ -84,12 +90,14 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 		inc[0] = -1;
 		dx = -dx;
 	}
+			ft_printf("linY r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 	e = (2 * dx) - dy;
 	while (inc[1] <= pts.y2)
 	{
 //		if(pts.x <= 1920 && pts.y <= 1080
 //				&& pts.x >= 0 && pts.y >= 0)
-			my_pixel_put(img, pts.x, pts.y, pts.color);
+		my_pixel_put(img, pts.x, pts.y, pts.color);
+		pts.color = smooth_colors(pts.color, pts.color2, pts.y2 - pts.y);
 		if (e > 0)
 		{
 			pts.x += inc[0];
@@ -100,7 +108,8 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 		pts.y += 1;
 		inc[1] += 1;
 	}
-				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
+			ft_printf("end r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
+//				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
 void	draw_line(t_imgdata *img, t_line_coordinates pts)
@@ -114,14 +123,14 @@ void	draw_line(t_imgdata *img, t_line_coordinates pts)
 	{
 		if (pts.x > pts.x2)
 			pts = switch_pts(pts);
-								ft_printf("Line-X\n");
+//								ft_printf("Line-X\n");
 		line_x(img, pts);
 	}
 	else
 	{
 		if (pts.y > pts.y2)
 			pts = switch_pts(pts);
-								ft_printf("Line-Y\n");
+//								ft_printf("Line-Y\n");
 		line_y(img, pts);
 	}
 }

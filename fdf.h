@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/14 22:07:30 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/15 09:52:34 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,12 @@ void				scale_pts(t_pts_coordinates *pts);
 void				origin_pts(t_pts_coordinates *pts);
 void				draw_map(t_pts_coordinates *pts, t_imgdata *img);
 void				link_pts(t_pts_coordinates *pts);
+int					smooth_colors(int color, int target_color, int pixels);
+int					inc_color(int color, int target_color, int pixels);
+int					min_max_value(int color);
+
+int					r_value(int color);
+int					g_value(int color);
+int					b_value(int color);
+int					o_value(int color);
 #endif
