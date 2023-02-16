@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 20:21:02 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 21:02:07 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -18,6 +18,24 @@
 	mlx_destroy_image(mlx.mlx, mlx.img.img);
 }*/
 
+void	clear_img(t_imgdata *img)
+{
+	int	i;
+	int j;
+	char *tmp;
+
+	i = 0;
+	j = 0;
+	while(i <= 1920 * 1080)
+	{
+		if (i % (1920 * 1080 / 1920 * 60) == 0)
+			j += 2;
+		tmp = img->addr + (img->bpp / 8) * i;
+		*(unsigned int *) tmp = rgbo_color(80 + j, 80 + j, 180 + j, 0); 
+		i++;
+	}
+}
+// TODO Fix overflow in Y axis
 t_imgdata	create_image(t_mlx_data mlx)
 {
 	t_imgdata	img;
@@ -30,8 +48,9 @@ int	hook_move_img(int direction, t_mlx_data mlx)
 {
 	print_list(mlx.pts);
 	translation_pts(mlx.pts, direction);
-	mlx_destroy_image(mlx.mlx, mlx.img.img);
-	mlx.img = create_image(mlx);
+	clear_img(&mlx.img);
+//	mlx_destroy_image(mlx.mlx, mlx.img.img);
+//	mlx.img = create_image(mlx);
 	print_list(mlx.pts);
 	draw_map(mlx.pts, &mlx.img);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);

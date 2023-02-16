@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:54:00 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 20:22:41 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:35:59 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -115,7 +115,7 @@ int	smooth_colors(int color, int target_color, int pixels)
 
 void	scale_pts(t_pts_coordinates *pts)
 {
-	int inc = 10;
+	int inc = 20;
 
 	while (pts)
 	{	
