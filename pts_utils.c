@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:54:00 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/15 11:12:28 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 20:22:41 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -115,7 +115,7 @@ int	smooth_colors(int color, int target_color, int pixels)
 
 void	scale_pts(t_pts_coordinates *pts)
 {
-	int inc = 50;
+	int inc = 10;
 
 	while (pts)
 	{	
@@ -129,12 +129,12 @@ void	scale_pts(t_pts_coordinates *pts)
 void	altitude_color(t_pts_coordinates *pts)
 {
 	int	rgb;
-				int i;
-				i=0;
+				//int i;
+				//i=0;
 
 	while (pts)
 	{
-				ft_printf("pts:%i y=%i, z=%i\n", i, pts->y, pts->z);
+//				ft_printf("pts:%i y=%i, z=%i\n", i, pts->y, pts->z);
 		rgb = 255/50 * pts->z;
 		pts->color = rgbo_color(rgb + 25, rgb - 200, rgb - 200, 0);
 		pts = pts->next;
@@ -160,6 +160,29 @@ void	origin_pts(t_pts_coordinates *pts)
 	{
 		pts->x = base_x + pts->x;
 		pts->y = base_y + pts->y;
+		pts = pts->next;
+	}
+}
+// LEFT = 65361 UP = 65362 RIGHT = 65363 DOWN = 65364
+void	translation_pts(t_pts_coordinates *pts, int direction)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	if (direction == 1)
+		x = -1;
+	else if (direction == 2)
+		y = -1;
+	else if (direction == 3)
+		x = 1;
+	else if (direction == 4)
+		y = 1;
+	while(pts)
+	{
+		pts->x += x;
+		pts->y += y;
 		pts = pts->next;
 	}
 }

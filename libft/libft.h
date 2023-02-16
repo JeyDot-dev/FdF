@@ -6,7 +6,7 @@
 /*   By: jsousa-a <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 12:01:49 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/08 15:02:56 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:51:56 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,28 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <fcntl.h>
+//colors !!
+# define BLACK "\e[0;30m"
+# define RED "\e[0;31m"
+# define GREEN "\e[0;32m"
+# define YELLOW "\e[0;33m"
+# define BLUE "\e[0;34m"
+# define MAGENTA "\e[0;35m"
+# define CYAN "\e[0;36m"
+# define WHITE "\e[0;37m"
+# define COLOR_RESET "\e[0m"
+//struct
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-int				ft_abs(int n);
+//libft base functions
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
-int				ft_printf(const char *str, ...);
 size_t			ft_strlen(const char *s);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
@@ -57,13 +67,13 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
-char			*ft_itoa_base(unsigned long long int n, char *base);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+//**linked lists base functions**
 t_list			*ft_lstnew(void *content);
 void			ft_lstadd_front(t_list **lst, t_list *new);
 int				ft_lstsize(t_list *lst);
@@ -73,6 +83,10 @@ void			ft_lstdelone(t_list *lst, void (*del)(void *));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+//**Added functions**
+int				ft_abs(int n);
+int				ft_printf(const char *str, ...);
+char			*ft_itoa_base(unsigned long long int n, char *base);
 //****GNL****
 char	*g_free(char *str);
 char	*g_calloc(int ct);

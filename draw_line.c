@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/15 11:08:04 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 19:49:55 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 		dy = -dy;
 	}
 	e = (2 * dy) - dx;
-			ft_printf("linX r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 	while (inc[1] <= pts.x2)
 	{
 //				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
@@ -70,7 +69,6 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 		pts.x += 1;
 		inc[1] += 1;
 	}
-			ft_printf("end r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 //				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
@@ -90,7 +88,6 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 		inc[0] = -1;
 		dx = -dx;
 	}
-			ft_printf("linY r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 	e = (2 * dx) - dy;
 	while (inc[1] <= pts.y2)
 	{
@@ -108,7 +105,6 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 		pts.y += 1;
 		inc[1] += 1;
 	}
-			ft_printf("end r1=%i, r2=%i\n", r_value(pts.color), r_value(pts.color2));
 //				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 

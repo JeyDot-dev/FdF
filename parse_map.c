@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:39:37 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/11 17:27:17 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/16 16:47:25 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ t_pts_coordinates	*fdf_lstnew(int x, int y, int z)
 	new->next = NULL;
 	return (new);
 }
+
 void	fdf_lstadd_back(t_pts_coordinates **lst, t_pts_coordinates *new)
 {
 	t_pts_coordinates	*temp;
 
 	if (!*lst && new)
-	{
 		*lst = new;
-	}
 	else if (lst && new && *lst)
 	{
 		temp = fdf_lstlast(*lst);
@@ -87,7 +86,6 @@ void	add_pts_list(t_pts_coordinates **head, char *new_line)
 		}
 		x++;
 	}
-					ft_printf("End of add_pts, x=%i, y=%i\n", x, y);
 }
 
 t_pts_coordinates	*map_to_pts(int fd)
@@ -105,7 +103,6 @@ t_pts_coordinates	*map_to_pts(int fd)
 		add_pts_list(&head, new_line);
 		free(new_line);
 	}
-						ft_printf("WOW\n");
 	return (head);
 }
 
