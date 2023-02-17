@@ -14,7 +14,8 @@
 NAME		=	fdf
 
 SRC			=	fdf.c	draw_line.c	tests.c	ft_isometric.c	parse_map.c\
-				draw_map.c	pts_utils.c	dup_list.c	list_utils.c
+				draw_map.c	pts_utils.c	dup_list.c	list_utils.c\
+				img_utils.c
 OBJS 		=	${SRC:.c=.o}
 
 INCS 		=	libft		mlx

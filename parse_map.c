@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:39:37 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 16:47:25 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:57:20 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ t_pts_coordinates	*map_to_pts(int fd)
 		add_pts_list(&head, new_line);
 		free(new_line);
 	}
+	close(fd);
 	return (head);
 }
 

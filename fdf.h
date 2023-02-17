@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 08:19:43 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 11:53:13 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_mlx_data{
 
 //pts value function
 void				size_pts(t_pts_coordinates *pts);
-void				origin_pts(t_pts_coordinates *pts);
+void				origin_pts(t_pts_coordinates *pts, int width, int height);
 void				link_pts(t_pts_coordinates *pts);
 t_pts_coordinates	*map_to_pts(int fd);
 t_line_coordinates	pts_to_line(t_pts_coordinates a, t_pts_coordinates b);
@@ -70,15 +70,17 @@ void				altitude_color(t_pts_coordinates *pts);
 int					smooth_colors(int color, int target_color, int pixels);
 int					inc_color(int color, int target_color, int pixels);
 int					min_max_value(int color);
-int					r_value(int color);
-int					g_value(int color);
-int					b_value(int color);
-int					o_value(int color);
-//utility functions
-t_imgdata			create_image(t_mlx_data mlx);
+//list utilities
 void				dup_list(t_pts_coordinates **new, t_pts_coordinates *pts);
 t_pts_coordinates	*dup_struct(t_pts_coordinates pts);
 void				fdf_lstadd_back(t_pts_coordinates **lst, t_pts_coordinates *new);
 void				print_list(t_pts_coordinates *pts);
-
+//img utilities
+t_imgdata			create_image(t_mlx_data mlx);
+void				clear_img(t_imgdata *img, int col);
+//single color values
+int					r_value(int color);
+int					g_value(int color);
+int					b_value(int color);
+int					o_value(int color);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 08:22:28 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 12:24:21 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -18,51 +18,7 @@
 	mlx_destroy_image(mlx.mlx, mlx.img.img);
 }*/
 
-void	clear_img(t_imgdata *img)
-{
-	int	i;
-	int j;
-	char *tmp;
-
-	i = 0;
-	j = 0;
-	while(i <= 1920 * 1080)
-	{
-		if (i % (1920 * 1080 / 1920 * 60) == 0)
-			j += 2;
-		tmp = img->addr + (img->bpp / 8) * i;
-		*(unsigned int *) tmp = rgbo_color(80 + j, 80 + j, 180 + j, 0); 
-		i++;
-	}
-}
-t_imgdata	create_image(t_mlx_data mlx)
-{
-	t_imgdata	img;
-	img.img = mlx_new_image(mlx.mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
-
-	return (img);
-}
-int	hook_move_img(int direction, t_mlx_data mlx)
-{
-	translation_pts(mlx.pts, direction);
-	clear_img(&mlx.img);
-//	mlx_destroy_image(mlx.mlx, mlx.img.img);
-//	mlx.img = create_image(mlx);
-	draw_map(mlx.pts, &mlx.img);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
-	return(0);
-}
-int	hook_scale_img(int scale, t_mlx_data mlx)
-{
-	scale %= 65450;
-	clear_img(&mlx.img);
-	scale_pts(mlx.pts, scale);
-	draw_map(mlx.pts, &mlx.img);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
-	return(0);
-}
-int	hook_close_fdf(int keycode, t_mlx_data *mlx)
+int	key_functions(int keycode, t_mlx_data *mlx)
 {
 	if (keycode == 65307)
 	{
@@ -76,17 +32,19 @@ int	hook_close_fdf(int keycode, t_mlx_data *mlx)
 	}
 	if (keycode == 65453 || keycode == 65451)
 		hook_scale_img(keycode, *mlx);
+	if (keycode > 47 && keycode < 52)
+		hook_background(keycode, *mlx);
 	ft_printf("Keycode = %i\n", keycode);
 	return(0);
 //		mlx_destroy_window(mlx.mlx, mlx.win);
 }
 
-void	convert_pts(t_pts_coordinates *pts)
+void	convert_pts(t_mlx_data mlx)
 {
-	link_pts(pts);
-	altitude_color(pts);
-	size_pts(pts);
-	origin_pts(pts);
+	link_pts(mlx.pts);
+	altitude_color(mlx.pts);
+	size_pts(mlx.pts);
+	origin_pts(mlx.pts, mlx.img.width, mlx.img.height);
 }
 int	main(int ac, char **av)
 {
@@ -95,24 +53,18 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (-1);
+	mlx.img.width = 1920;
+	mlx.img.height = 1080;
 	fd = open(av[1], O_RDONLY);
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, 1920, 1080, "test window");
+	mlx.win = mlx_new_window(mlx.mlx, mlx.img.width, mlx.img.height, "0/\
+	1/2/3 = bg, arrow = move, +/- = zoom");
 	mlx.img = create_image(mlx);
 	mlx.pts = map_to_pts(fd);
-	print_list(mlx.pts);
-	convert_pts(mlx.pts);
-	ft_printf("Post_conversion\n");
-	/*while (pts)
-	{
-		ft_printf("pts.x=%i\n, color=%i--", pts->x, pts->color);
-		pts = pts->next;
-	}*/
+	convert_pts(mlx);
 	draw_map(mlx.pts, &mlx.img);
-							ft_printf("AFTER DRAW_MAP\n");
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
-
-	mlx_hook(mlx.win, 2, 1L<<0, hook_close_fdf, &mlx);
+	mlx_hook(mlx.win, 2, 1L<<0, key_functions, &mlx);
 //	mlx_hook(mlx.win, 2, 1L<<0, hook_move_img, &mlx.pts);
 //	mlx_hook(mlx.win, 3, 1L<<1, hook_close_fdf, &mlx.pts);
 	mlx_loop(mlx.mlx);
