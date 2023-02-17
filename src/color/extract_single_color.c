@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   extract_single_color.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:30:33 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 19:50:27 by jsousa-a         ###   ########.fr       */
+/*   Created: 2023/02/17 11:41:52 by jsousa-a          #+#    #+#             */
+/*   Updated: 2023/02/17 20:47:47 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "fdf.h"
 
-void	draw_map(t_pts_coordinates *pts, t_imgdata *img)
+int	r_value(int color)
 {
-	while (pts->next)
-	{
-		if (pts->below)
-		{
-			draw_line(img, pts_to_line(to_isometric(*pts), to_isometric(*pts->below)));
-		}
-		if (pts->link)
-		{
-			draw_line(img, pts_to_line(to_isometric(*pts), to_isometric(*pts->next)));
-		}
-		pts = pts->next;
-	}
+	int	red;
+
+	red = (color >> 24 << 24 ^ color) >> 16;
+	return (red);
+}
+
+int	g_value(int color)
+{
+	int	green;
+
+	green = (color >> 16 << 16 ^ color) >> 8;
+	return (green);
+}
+
+int	b_value(int color)
+{
+	int	blue;
+
+	blue = (color >> 8 << 8 ^ color);
+	return (blue);
+}
+
+int	o_value(int color)
+{
+	int	opacity;
+
+	opacity = color >> 24;
+	return (opacity);
 }

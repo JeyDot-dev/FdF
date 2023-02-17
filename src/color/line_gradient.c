@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:40:23 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 11:40:53 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:46:45 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -39,10 +39,10 @@ int	inc_color(int color, int target_color, int pixels)
 
 int	smooth_colors(int color, int target_color, int pixels)
 {
-	int r;
-	int g;
-	int b;
-	int o;
+	int	r;
+	int	g;
+	int	b;
+	int	o;
 
 	r = inc_color(r_value(color), r_value(target_color), pixels);
 	g = inc_color(g_value(color), g_value(target_color), pixels);

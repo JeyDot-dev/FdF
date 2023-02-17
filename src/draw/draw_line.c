@@ -6,20 +6,13 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 07:57:00 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 20:46:03 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_pixel_put(t_imgdata *img, int x, int y, int color)
-{
-	char	*colordst;
-
-	colordst = img->addr + (img->line_len * y + (img->bpp / 8) * x);
-	*(unsigned int *) colordst = color;
-}
-t_line_coordinates switch_pts(t_line_coordinates pts)
+t_line_coordinates	switch_pts(t_line_coordinates pts)
 {
 	int	buffer;
 
@@ -35,98 +28,94 @@ t_line_coordinates switch_pts(t_line_coordinates pts)
 	return (pts);
 }
 
+t_bresenham	populating_t_bresenham(t_bresenham ham,
+				t_line_coordinates pts)
+{
+	ham.dx = pts.x2 - pts.x;
+	ham.dy = pts.y2 - pts.y;
+	ham.inc[0] = 1;
+	if (ham.dx > ham.dy)
+		ham.inc[1] = pts.x;
+	else
+		ham.inc[1] = pts.y;
+	if (ham.dx > ham.dy && ham.dy < 0)
+	{
+		ham.inc[0] = -1;
+		ham.dy = -ham.dy;
+	}
+	else if (ham.dy > ham.dx && ham.dx < 0)
+	{
+		ham.inc[0] = -1;
+		ham.dx = -ham.dx;
+	}
+	return (ham);
+}
+
 void	line_x(t_imgdata *img, t_line_coordinates pts)
 {
-	int	dy;
-	int	e;
-	int	dx;
-	int inc[2];
+	t_bresenham	bres;
 
-	dx = pts.x2 - pts.x;
-	dy = pts.y2 - pts.y;
-	inc[0] = 1;
-	inc[1] = pts.x;
-	if (dy < 0)
+	bres = populating_t_bresenham(bres, pts);
+	bres.e = (2 * bres.dy) - bres.dx;
+	while (bres.inc[1] <= pts.x2)
 	{
-		inc[0] = -1;
-		dy = -dy;
-	}
-	e = (2 * dy) - dx;
-	while (inc[1] <= pts.x2)
-	{
-//				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
-		if(pts.x <= 1920 && pts.y <= 1080
-				&& pts.x >= 0 && pts.y >= 0)
-		my_pixel_put(img, pts.x, pts.y, pts.color);
+		if (pts.x <= 1920 && pts.y <= 1080
+			&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.x2 - pts.x);
-		if (e > 0)
+		if (bres.e > 0)
 		{
-			pts.y += inc[0];
-			e = e + (2 * (dy - dx));
+			pts.y += bres.inc[0];
+			bres.e = bres.e + (2 * (bres.dy - bres.dx));
 		}
 		else
-			e = e + 2 * dy;
+			bres.e = bres.e + 2 * bres.dy;
 		pts.x += 1;
-		inc[1] += 1;
+		bres.inc[1] += 1;
 	}
-//				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
 void	line_y(t_imgdata *img, t_line_coordinates pts)
 {
-	int	dy;
-	int	e;
-	int	dx;
-	int inc[2];
-	
-	dx = pts.x2 - pts.x;
-	dy = pts.y2 - pts.y;
-	inc[0] = 1;
-	inc[1] = pts.y;
-	if (dx < 0)
+	t_bresenham	bres;
+
+	bres = populating_t_bresenham(bres, pts);
+	bres.e = (2 * bres.dx) - bres.dy;
+	while (bres.inc[1] <= pts.y2)
 	{
-		inc[0] = -1;
-		dx = -dx;
-	}
-	e = (2 * dx) - dy;
-	while (inc[1] <= pts.y2)
-	{
-		if(pts.x <= 1920 && pts.y <= 1080
-				&& pts.x >= 0 && pts.y >= 0)
-		my_pixel_put(img, pts.x, pts.y, pts.color);
+		if (pts.x <= 1920 && pts.y <= 1080
+			&& pts.x >= 0 && pts.y >= 0)
+			my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.y2 - pts.y);
-		if (e > 0)
+		if (bres.e > 0)
 		{
-			pts.x += inc[0];
-			e = e + (2 * (dx - dy));
+			pts.x += bres.inc[0];
+			bres.e = bres.e + (2 * (bres.dx - bres.dy));
 		}
 		else
-			e = e + 2 * dx;
+			bres.e = bres.e + 2 * bres.dx;
 		pts.y += 1;
-		inc[1] += 1;
+		bres.inc[1] += 1;
 	}
-//				ft_printf("Last Pixel at %i, %i\n", pts.x, pts.y);
 }
 
 void	draw_line(t_imgdata *img, t_line_coordinates pts)
 {
 	int	dy;
 	int	dx;
+
 	dy = ft_abs(pts.y2 - pts.y);
 	dx = ft_abs(pts.x2 - pts.x);
-								//ft_printf("dx = %i, dy = %i\n", dx, dy);
 	if (dy < dx)
 	{
 		if (pts.x > pts.x2)
 			pts = switch_pts(pts);
-//								ft_printf("Line-X\n");
 		line_x(img, pts);
 	}
 	else
 	{
 		if (pts.y > pts.y2)
 			pts = switch_pts(pts);
-//								ft_printf("Line-Y\n");
 		line_y(img, pts);
 	}
 }

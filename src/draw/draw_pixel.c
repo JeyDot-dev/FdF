@@ -1,44 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_single_color.c                             :+:      :+:    :+:   */
+/*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 11:41:52 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 11:42:07 by jsousa-a         ###   ########.fr       */
+/*   Created: 2023/02/17 13:30:20 by jsousa-a          #+#    #+#             */
+/*   Updated: 2023/02/17 13:30:40 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "fdf.h"
 
-int	r_value(int color)
+void	my_pixel_put(t_imgdata *img, int x, int y, int color)
 {
-	int	red;
+	char	*colordst;
 
-	red = (color >> 24 << 24 ^ color) >> 16;
-	return (red);
-}
-
-int	g_value(int color)
-{
-	int	green;
-
-	green = (color >> 16 << 16 ^ color) >> 8;
-	return (green);
-}
-
-int	b_value(int color)
-{
-	int	blue;
-
-	blue = (color >> 8 << 8 ^ color); 
-	return (blue);
-}
-
-int	o_value(int color)
-{
-	int opacity;
-
-	opacity = color >> 24; 
-	return (opacity);
+	colordst = img->addr + (img->line_len * y + (img->bpp / 8) * x);
+	*(unsigned int *) colordst = color;
 }

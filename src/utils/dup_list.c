@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 10:12:08 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 17:39:21 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 17:57:27 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -26,12 +26,12 @@ t_pts_coordinates	*dup_struct(t_pts_coordinates pts)
 	return (new);
 }
 
-void dup_list(t_pts_coordinates **new, t_pts_coordinates *pts)
+void	dup_list(t_pts_coordinates **new, t_pts_coordinates *pts)
 {
 	while (pts)
 	{
 		ft_printf("Loop dup\n");
-		fdf_lstadd_back(new, dup_struct(*pts));
+		add_struct(new, dup_struct(*pts));
 		pts = pts->next;
 	}
 }
