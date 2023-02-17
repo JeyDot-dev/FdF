@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 19:49:55 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 07:57:00 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 	while (inc[1] <= pts.x2)
 	{
 //				ft_printf("x=%i, y=%i\n", pts.x, pts.y);
-//		if(pts.x <= 1920 && pts.y <= 1080
-//				&& pts.x >= 0 && pts.y >= 0)
+		if(pts.x <= 1920 && pts.y <= 1080
+				&& pts.x >= 0 && pts.y >= 0)
 		my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.x2 - pts.x);
 		if (e > 0)
@@ -91,8 +91,8 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 	e = (2 * dx) - dy;
 	while (inc[1] <= pts.y2)
 	{
-//		if(pts.x <= 1920 && pts.y <= 1080
-//				&& pts.x >= 0 && pts.y >= 0)
+		if(pts.x <= 1920 && pts.y <= 1080
+				&& pts.x >= 0 && pts.y >= 0)
 		my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.y2 - pts.y);
 		if (e > 0)

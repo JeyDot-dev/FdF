@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 21:02:07 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 07:58:55 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -35,7 +35,6 @@ void	clear_img(t_imgdata *img)
 		i++;
 	}
 }
-// TODO Fix overflow in Y axis
 t_imgdata	create_image(t_mlx_data mlx)
 {
 	t_imgdata	img;
