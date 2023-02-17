@@ -1,5 +1,5 @@
 # FdF
-Project fdf for 42lausanne
+Project fdf for 42lausanne or how to make 3d isometric meshes from map files (see test_maps)
 
 ## 42 map  
 ![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/42_01.png)  
