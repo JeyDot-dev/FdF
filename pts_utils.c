@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 15:54:00 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 20:35:59 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 09:00:12 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -113,7 +113,7 @@ int	smooth_colors(int color, int target_color, int pixels)
 	return (rgbo_color(r, g, b, o));
 }
 
-void	scale_pts(t_pts_coordinates *pts)
+void	size_pts(t_pts_coordinates *pts)
 {
 	int inc = 20;
 
@@ -121,7 +121,7 @@ void	scale_pts(t_pts_coordinates *pts)
 	{	
 		pts->x = inc * pts->x;
 		pts->y = inc * pts->y;
-		pts->z = 5 * pts->z;
+		pts->z = inc / 4 * pts->z;
 		pts = pts->next;
 	}
 }
@@ -136,7 +136,7 @@ void	altitude_color(t_pts_coordinates *pts)
 	{
 //				ft_printf("pts:%i y=%i, z=%i\n", i, pts->y, pts->z);
 		rgb = 255/50 * pts->z;
-		pts->color = rgbo_color(rgb + 25, rgb - 200, rgb - 200, 0);
+		pts->color = rgbo_color(rgb + 150, rgb + 60, rgb, 0);
 		pts = pts->next;
 	}
 }
@@ -168,21 +168,49 @@ void	translation_pts(t_pts_coordinates *pts, int direction)
 {
 	int	x;
 	int	y;
+	int	translation_ammount;
 
 	x = 0;
 	y = 0;
+	translation_ammount = 6;
 	if (direction == 1)
-		x = -1;
+		x = -translation_ammount;
 	else if (direction == 2)
-		y = -1;
+		y = -translation_ammount;
 	else if (direction == 3)
-		x = 1;
+		x = translation_ammount;
 	else if (direction == 4)
-		y = 1;
+		y = translation_ammount;
 	while(pts)
 	{
 		pts->x += x;
 		pts->y += y;
+		pts = pts->next;
+	}
+}
+void	scale_pts(t_pts_coordinates *pts, int key)
+{
+	double inc;
+	int	x;
+	int	y;
+	int	z;
+
+	inc = 1.1;
+	x = pts->x / 10;
+	y = pts->y / 10;
+	z = pts->z / 10;
+	if (key == 3)
+	{
+		inc = 0.9;
+		x = -x;
+		y = -y;
+		z = -z;
+	}
+	while (pts)
+	{	
+		pts->x = inc * pts->x - x;
+		pts->y = inc * pts->y - y;
+		pts->z = inc * pts->z - z;
 		pts = pts->next;
 	}
 }

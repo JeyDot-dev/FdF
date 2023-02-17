@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 07:58:55 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 08:22:28 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -45,12 +45,19 @@ t_imgdata	create_image(t_mlx_data mlx)
 }
 int	hook_move_img(int direction, t_mlx_data mlx)
 {
-	print_list(mlx.pts);
 	translation_pts(mlx.pts, direction);
 	clear_img(&mlx.img);
 //	mlx_destroy_image(mlx.mlx, mlx.img.img);
 //	mlx.img = create_image(mlx);
-	print_list(mlx.pts);
+	draw_map(mlx.pts, &mlx.img);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
+	return(0);
+}
+int	hook_scale_img(int scale, t_mlx_data mlx)
+{
+	scale %= 65450;
+	clear_img(&mlx.img);
+	scale_pts(mlx.pts, scale);
 	draw_map(mlx.pts, &mlx.img);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
 	return(0);
@@ -67,6 +74,8 @@ int	hook_close_fdf(int keycode, t_mlx_data *mlx)
 		keycode %= 65360;
 		hook_move_img(keycode, *mlx);
 	}
+	if (keycode == 65453 || keycode == 65451)
+		hook_scale_img(keycode, *mlx);
 	ft_printf("Keycode = %i\n", keycode);
 	return(0);
 //		mlx_destroy_window(mlx.mlx, mlx.win);
@@ -76,7 +85,7 @@ void	convert_pts(t_pts_coordinates *pts)
 {
 	link_pts(pts);
 	altitude_color(pts);
-	scale_pts(pts);
+	size_pts(pts);
 	origin_pts(pts);
 }
 int	main(int ac, char **av)

@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:56:19 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/16 20:20:45 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 08:19:43 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ typedef struct s_mlx_data{
 }				t_mlx_data;
 
 //pts value function
-void				scale_pts(t_pts_coordinates *pts);
+void				size_pts(t_pts_coordinates *pts);
 void				origin_pts(t_pts_coordinates *pts);
 void				link_pts(t_pts_coordinates *pts);
 t_pts_coordinates	*map_to_pts(int fd);
 t_line_coordinates	pts_to_line(t_pts_coordinates a, t_pts_coordinates b);
 t_pts_coordinates				to_isometric(t_pts_coordinates pts);
 void				translation_pts(t_pts_coordinates *pts, int direction);
+void				scale_pts(t_pts_coordinates *pts, int key);
 //draw functions
 void				draw_map(t_pts_coordinates *pts, t_imgdata *img);
 void				draw_line(t_imgdata *img, t_line_coordinates pts);
