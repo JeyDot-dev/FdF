@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:32:26 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 19:51:25 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/17 22:40:11 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -29,7 +29,7 @@ void	clear_img(t_imgdata *img, int col)
 			j += 2;
 		tmp = img->addr + (img->bpp / 8) * i;
 		if (base == 1)
-			*(unsigned int *) tmp = rgbo_color(0 + j, 50 + j, 100 + j, 0);
+			*(unsigned int *) tmp = rgbo_color(0 + j, 90 + j, 130 + j, 0);
 		else if (base == 2)
 			*(unsigned int *) tmp = rgbo_color(120 + j, 40 - j, 140 - j, 0);
 		else if (base == 3)
