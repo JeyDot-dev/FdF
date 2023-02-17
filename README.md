@@ -10,6 +10,6 @@ Project fdf for 42lausanne
 ## fractal map with bg 2  
 ![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/fractal_02.png)  
 ## t1 map  
-![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountain_01.png)  
+![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountains_01.png)  
 ## t1 map with bg 3  
-![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountain_02.png)  
+![alt text](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountains_02.png)  
