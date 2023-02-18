@@ -30,7 +30,8 @@ SRC			=	${SRC_DIR}fdf.c \
 				${addprefix ${SRC_DIR}utils/,${SRC_UTILS}}\
 				${addprefix ${SRC_DIR}hook/,${SRC_HOOK}}
 
-OBJ 		=	${SRC:%.c=${OBJ_DIR}${notdir %.o}}
+OBJ 		=	${SRC:%.c=%.o}
+OBJF		=	${addprefix ${OBJ_DIR},${notdir ${OBJ}}}
 
 HEADER_DIR	=	libft	mlx inc
 LIB_DIR		=	libft/ mlx/
@@ -54,12 +55,12 @@ CC			=	gcc
 #--------------------------------------------------------------------------------
 
 %.o		:	%.c
-			${CC} ${CFLAGS} ${HEADERS} -c $< -o $@
+			${CC} ${CFLAGS} ${HEADERS} -c $< -o ${addprefix ${OBJ_DIR},${notdir $@}}
 
 all		:	${NAME}
 
 ${NAME}	:	complib ${OBJ}
-			${CC} ${OBJ} ${LIBS} ${FS} -o ${NAME}
+			${CC} ${OBJF} ${LIBS} ${FS} -o ${NAME}
 
 complib	:
 			@${MAKE} -s -C libft
@@ -72,6 +73,7 @@ linux	:	fclean cleanlinux
 			$(CC) ${addsuffix .o,${notdir ${basename ${SRC}}}}  -Lminilibx-linux -lmlx_Linux -Llibft -lft  -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 cleanlinux :
+			${RM} ${NAME}
 			${MAKE} -C libft fclean
 			${MAKE} -C minilibx-linux clean
 			${RM} ${addsuffix .o,${notdir ${basename ${SRC}}}}
