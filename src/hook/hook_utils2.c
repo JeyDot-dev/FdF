@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   hook_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 09:00:43 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/18 09:00:49 by jsousa-a         ###   ########.fr       */
+/*   Created: 2023/02/18 08:46:33 by jsousa-a          #+#    #+#             */
+/*   Updated: 2023/02/18 08:55:47 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_abs(int n)
+#include "fdf.h"
+
+int	hook_resize_functions(void)
 {
-	if (n < 0)
-		n *= -1;
-	return (n);
+	return (0);
+}
+
+int	hook_button_functions(t_mlx_data *mlx)
+{
+	close_fdf(mlx);
+	return (0);
 }

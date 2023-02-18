@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 12:41:02 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 22:23:33 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:56:57 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -18,44 +18,6 @@
 	mlx_destroy_image(mlx.mlx, mlx.img.img);
 }*/
 
-int	resize_functions(void)
-{
-		return (0);
-}
-
-int	button_functions(t_mlx_data *mlx)
-{
-		delete_list(mlx->pts);
-		mlx_destroy_image(mlx->mlx, mlx->img.img);
-		mlx_destroy_window(mlx->mlx, mlx->win);
-		ft_printf(GREEN "Successfuly closed fdf.\n" COLOR_RESET);
-		exit(0);
-}
-
-int	key_functions(int keycode, t_mlx_data *mlx)
-{
-	if (keycode == 65307)
-	{
-		delete_list(mlx->pts);
-		mlx_destroy_image(mlx->mlx, mlx->img.img);
-		mlx_destroy_window(mlx->mlx, mlx->win);
-		ft_printf(GREEN "Successfuly closed fdf.\n" COLOR_RESET);
-		exit(0);
-	}
-	if (keycode > 65360 && keycode < 65365)
-	{
-		keycode %= 65360;
-		hook_move_img(keycode, *mlx);
-	}
-	if (keycode == 65453 || keycode == 65451)
-		hook_scale_img(keycode, *mlx);
-	if (keycode > 47 && keycode < 52)
-		hook_background(keycode, *mlx);
-	ft_printf("Keycode = %i\n", keycode);
-	return(0);
-//		mlx_destroy_window(mlx.mlx, mlx.win);
-}
-
 void	convert_pts(t_mlx_data mlx)
 {
 	link_pts(mlx.pts);
@@ -63,6 +25,7 @@ void	convert_pts(t_mlx_data mlx)
 	size_pts(mlx.pts);
 	origin_pts(mlx.pts, mlx.img.width, mlx.img.height);
 }
+
 int	check_file_ext(char *file, char *ext)
 {
 	int	i;
@@ -83,8 +46,10 @@ int	check_file_ext(char *file, char *ext)
 	}
 	if ((unsigned int) j == ft_strlen(ext) && file[i] == 0)
 		return (1);
-	else return(0);
+	else
+		return (0);
 }
+
 int	main(int ac, char **av)
 {
 	t_mlx_data			mlx;
@@ -106,9 +71,8 @@ int	main(int ac, char **av)
 	convert_pts(mlx);
 	draw_map(mlx.pts, &mlx.img);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
-	mlx_hook(mlx.win, 2, 1L<<0, key_functions, &mlx);
-	mlx_hook(mlx.win, 25, 1L<<18, resize_functions, &mlx);
-	mlx_hook(mlx.win, 17, 1L<<3, button_functions, &mlx);
-//	mlx_hook(mlx.win, 3, 1L<<1, hook_close_fdf, &mlx.pts);
+	mlx_hook(mlx.win, 2, 1L << 0, hook_key_functions, &mlx);
+	mlx_hook(mlx.win, 25, 1L << 18, hook_resize_functions, &mlx);
+	mlx_hook(mlx.win, 17, 1L << 3, hook_button_functions, &mlx);
 	mlx_loop(mlx.mlx);
 }

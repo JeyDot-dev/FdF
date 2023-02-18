@@ -18,7 +18,7 @@ SRC_COLOR	=	color_utils.c extract_single_color.c \
 SRC_DRAW	=	draw_line.c draw_map.c draw_pixel.c
 SRC_PTS		=	ft_isometric.c parse_map.c pts_utils.c
 SRC_UTILS	=	dup_list.c img_utils.c list_utils.c
-SRC_HOOK	=	hook_functions.c hook_utils.c
+SRC_HOOK	=	hook_functions.c hook_utils.c hook_utils2.c
 
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/

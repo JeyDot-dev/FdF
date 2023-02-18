@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:17:26 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 19:59:10 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:46:49 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -61,4 +61,13 @@ void	scale_pts(t_pts_coordinates *pts, int key)
 		pts->z = inc * pts->z - z;
 		pts = pts->next;
 	}
+}
+
+void	close_fdf(t_mlx_data *mlx)
+{
+	delete_list(mlx->pts);
+	mlx_destroy_image(mlx->mlx, mlx->img.img);
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	ft_printf(GREEN "Successfuly closed fdf.\n" COLOR_RESET);
+	exit(0);
 }

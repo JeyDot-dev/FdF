@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 12:39:37 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 21:59:29 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:19:12 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_pts_coordinates	*map_to_pts(int fd)
 	char				*new_line;
 
 	new_line = get_next_line(fd);
-	if(!new_line)
+	if (!new_line)
 	{
 		printf(RED "INPUT_ERROR\n");
 		exit(0);

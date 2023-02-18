@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:43:39 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 20:33:41 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:55:09 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void				link_pts(t_pts_coordinates *pts);
 t_pts_coordinates	*map_to_pts(int fd);
 t_line_coordinates	pts_to_line(t_pts_coordinates a, t_pts_coordinates b);
 t_pts_coordinates	to_isometric(t_pts_coordinates pts);
-void				translation_pts(t_pts_coordinates *pts, int direction);
-void				scale_pts(t_pts_coordinates *pts, int key);
 //draw functions
 void				draw_map(t_pts_coordinates *pts, t_imgdata *img);
 void				draw_line(t_imgdata *img, t_line_coordinates pts);
@@ -100,4 +98,11 @@ int					o_value(int color);
 int					hook_background(int key, t_mlx_data mlx);
 int					hook_move_img(int direction, t_mlx_data mlx);
 int					hook_scale_img(int scale, t_mlx_data mlx);
+int					hook_resize_functions(void);
+int					hook_button_functions(t_mlx_data *mlx);
+int					hook_key_functions(int keycode, t_mlx_data *mlx);
+
+void				translation_pts(t_pts_coordinates *pts, int direction);
+void				scale_pts(t_pts_coordinates *pts, int key);
+void				close_fdf(t_mlx_data *mlx);
 #endif

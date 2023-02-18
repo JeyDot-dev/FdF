@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:32:26 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 22:40:11 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/18 08:38:50 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -22,7 +22,6 @@ void	clear_img(t_imgdata *img, int col)
 		base = col;
 	i = 0;
 	j = 0;
-	printf("w=%i,h=%i\n", img->width, img->height);
 	while (i <= img->width * img->height)
 	{
 		if (i % (img->width * img->height / img->width * 60) == 0)
