@@ -28,9 +28,9 @@ UNAME_S 	:= $(shell uname -s)
 SRC_D		:=	src/
 BUILD_D		:=	.build/
 LIB_D		:=	libft/ mlx/
-INC			:=	libft/	mlx/ inc/
+INC			:=	libft	mlx inc
 
-LIB			:=	ft mlx
+LIB			:=	ft	mlx
 INC			:=	inc/ mlx/ libft/
 SRC			:=	fdf.c									\
 				color/color_utils.c 	color/extract_single_color.c\
@@ -61,23 +61,25 @@ CC			:=	gcc
 DIR_DUP     =	mkdir -p "$(@D)"
 #-MMD -MP = Used to add dependencies during precomp. (for .h)
 CPPFLAGS    :=	-MMD -MP $(addprefix -I,$(INC))
-CFLAGS		:=	-Wextra -Werror -Wall
+CFLAGS		:=	-Wextra -Werror -Wall -g
 # -(r)eplace the older objects, -(c)reate if no lib, -s index stuff
 AR          :=	ar
 ARFLAGS     :=	-r -c -s
 LDFLAGS     :=	$(addprefix -L,$(dir $(LIB_D)))
 LDLIBS      :=	$(addprefix -l,$(LIB))
-LDFMWK		:=	$(addprefix -framework ,$(FRAMEWORKS))
+LDFMWK		:=	$(addprefix -framework ,$(FRAMEWORK))
 MAKEFLAGS   += --no-print-directory
 #-----------------------------all------------------------------------
 all		:	$(NAME)
 #-----------------------------NAME-----------------------------------
 $(NAME)	:	$(OBJ)
 			$(MAKE) complib
-			${CC} $(LDFLAGS) $(OBJ) $(LDLIBS) $(LDFMWK) -o $(NAME)
+			${CC} $(OBJ) $(LDFLAGS) $(LDLIBS) $(LDFMWK) -o $(NAME)
 			$(info MAKING $(NAME).....)
 			echo "\033[5;32m\t\tFinished compiling $(NAME) !!! $(CLR)"
 #------------------------OBJ COMPILATION-----------------------------
+info		:
+			echo $(LDFLAGS) $(LDLIBS) $(LDFMWK)
 $(BUILD_D)%.o	:	$(SRC_D)%.c
 			$(DIR_DUP)
 			$(CC) $(CFLAGS) $(CPPFLAGS) -O2 -c $< -o $@
@@ -111,7 +113,7 @@ fclean	:	clean
 	$(RM) $(NAME)
 	$(MAKE) -C libft fclean
 ifeq ($(UNAME_S),Darwin)
-	$(MAKE) -C /mlx clean
+	$(MAKE) -C mlx clean
 else
 	$(MAKE) -C minilibx-linux clean
 endif

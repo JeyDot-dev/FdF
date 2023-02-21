@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 17:43:39 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/18 08:55:09 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:23:10 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ t_pts_coordinates	*fdf_lstnew(int x, int y, int z);
 //img utilities
 t_imgdata			create_image(t_mlx_data mlx);
 void				clear_img(t_imgdata *img, int col);
-t_bresenham			populating_t_bresenham(t_bresenham ham,
-						t_line_coordinates pts);
+t_bresenham			populating_t_bresenham(t_line_coordinates pts);
 //single color values
 int					r_value(int color);
 int					g_value(int color);

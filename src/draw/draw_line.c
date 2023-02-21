@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/17 20:46:03 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:51:49 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ t_line_coordinates	switch_pts(t_line_coordinates pts)
 	return (pts);
 }
 
-t_bresenham	populating_t_bresenham(t_bresenham ham,
-				t_line_coordinates pts)
+t_bresenham	populating_t_bresenham(t_line_coordinates pts)
 {
+	t_bresenham	ham;
 	ham.dx = pts.x2 - pts.x;
 	ham.dy = pts.y2 - pts.y;
 	ham.inc[0] = 1;
@@ -55,7 +55,7 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 {
 	t_bresenham	bres;
 
-	bres = populating_t_bresenham(bres, pts);
+	bres = populating_t_bresenham(pts);
 	bres.e = (2 * bres.dy) - bres.dx;
 	while (bres.inc[1] <= pts.x2)
 	{
@@ -79,7 +79,7 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 {
 	t_bresenham	bres;
 
-	bres = populating_t_bresenham(bres, pts);
+	bres = populating_t_bresenham(pts);
 	bres.e = (2 * bres.dx) - bres.dy;
 	while (bres.inc[1] <= pts.y2)
 	{

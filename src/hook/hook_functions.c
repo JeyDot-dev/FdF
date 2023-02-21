@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:17:26 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/18 08:46:49 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:18:54 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -20,13 +20,13 @@ void	translation_pts(t_pts_coordinates *pts, int direction)
 	x = 0;
 	y = 0;
 	translation_ammount = 10;
-	if (direction == 1)
+	if (direction == 1 || direction == 123)
 		x = -translation_ammount;
-	else if (direction == 2)
+	else if (direction == 2 || direction == 126)
 		y = -translation_ammount;
-	else if (direction == 3)
+	else if (direction == 3 || direction == 124)
 		x = translation_ammount;
-	else if (direction == 4)
+	else if (direction == 4 || direction == 125)
 		y = translation_ammount;
 	while (pts)
 	{
@@ -47,7 +47,7 @@ void	scale_pts(t_pts_coordinates *pts, int key)
 	x = pts->x / 10;
 	y = pts->y / 10;
 	z = pts->z / 10;
-	if (key == 3)
+	if (key == 3 || key == 78)
 	{
 		inc = 0.9;
 		x = -x;
