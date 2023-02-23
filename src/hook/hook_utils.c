@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:37:30 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/21 18:18:46 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:55:17 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -56,7 +56,6 @@ void	hook_close_fdf(t_mlx_data *mlx)
 	delete_list(mlx->pts);
 	mlx_destroy_image(mlx->mlx, mlx->img.img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	ft_printf(GREEN "Successfuly closed fdf.\n" COLOR_RESET);
 	exit(0);
 }
 

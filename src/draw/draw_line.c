@@ -6,7 +6,7 @@
 /*   By: jsousa-a <jsousa-a@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 16:25:14 by jsousa-a          #+#    #+#             */
-/*   Updated: 2023/02/21 15:51:49 by jsousa-a         ###   ########.fr       */
+/*   Updated: 2023/02/23 12:30:44 by jsousa-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	line_x(t_imgdata *img, t_line_coordinates pts)
 	bres.e = (2 * bres.dy) - bres.dx;
 	while (bres.inc[1] <= pts.x2)
 	{
-		if (pts.x <= 1920 && pts.y <= 1080
+		if (pts.x < 1920 && pts.y < 1080
 			&& pts.x >= 0 && pts.y >= 0)
 			my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.x2 - pts.x);
@@ -83,7 +83,7 @@ void	line_y(t_imgdata *img, t_line_coordinates pts)
 	bres.e = (2 * bres.dx) - bres.dy;
 	while (bres.inc[1] <= pts.y2)
 	{
-		if (pts.x <= 1920 && pts.y <= 1080
+		if (pts.x < 1920 && pts.y < 1080
 			&& pts.x >= 0 && pts.y >= 0)
 			my_pixel_put(img, pts.x, pts.y, pts.color);
 		pts.color = smooth_colors(pts.color, pts.color2, pts.y2 - pts.y);
