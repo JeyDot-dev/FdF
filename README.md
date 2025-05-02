@@ -48,6 +48,8 @@ Navigate through the sections using the index for quick access to specific infor
 ## Usage
 Compile the program using the provided Makefile:
 
+Please install the right pre-requisites depending on your OS: [MiniLibx](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)
+
 ```bash
 make
 ```
