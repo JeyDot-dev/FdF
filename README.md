@@ -3,23 +3,6 @@
 ## Overview
 FDF is a graphical project that involves creating a wireframe representation of a landscape. It visually represents a terrain in relief by connecting different points (x, y, z) with line segments.
 
-# Index
-
-1. [Overview](#overview)
-2. [Features](#features)
-   - [Basic Functionality](#basic-functionality)
-   - [Rendering](#rendering)
-   - [Supported External Functions](#supported-external-functions)
-   - [Additional Rendering Features](#additional-rendering-features)
-   - [Visual Enhancements](#visual-enhancements)
-3. [Usage](#usage)
-   - [Interactive Controls](#interactive-controls)
-4. [Makefile Commands](#makefile-commands)
-5. [Screenshots](#screenshots)
-6. [External Functions](#external-functions)
-7. [Libft](#libft)
-
-Navigate through the sections using the index for quick access to specific information in the FDF - Fil De Fer README.
 ## Features
 
 ### Basic Functionality
@@ -31,11 +14,10 @@ Navigate through the sections using the index for quick access to specific infor
 - Display the rendering using an isometric projection.
 - Accept coordinates of the terrain from a parameterized file in the *.fdf format.
 
-### Supported External Functions
-- `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`
-- All functions from the math library (compile with the -lm option)
+### Function restrictions
+- Restricted to these standard functions: `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`
+- All functions from the math library
 - All functions from MiniLibX
-- Libft is allowed
 
 ### Additional Rendering Features
 - Implement zoom in and zoom out functionality.
@@ -46,9 +28,10 @@ Navigate through the sections using the index for quick access to specific infor
 - Objects have a gradient representing the Z value of the point.
 
 ## Usage
-Compile the program using the provided Makefile:
 
 Please install the right pre-requisites depending on your OS: [MiniLibx](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)
+
+Compile the program using the provided Makefile:
 
 ```bash
 make
@@ -70,10 +53,9 @@ Feel free to navigate, zoom, adjust gradients, and explore the graphical represe
 
 ## Makefile Commands
 - `make`: Compile the program.
-- `make all`: Same as `make`.
 - `make clean`: Remove object files.
 - `make fclean`: Remove object files and the executable.
-- `make re`: Rebuild the program from scratch.
+- `make re`: Recompiles the program from scratch.
 
 ## Screenshots
 ![42 map](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/42_01.png)
@@ -83,12 +65,5 @@ Feel free to navigate, zoom, adjust gradients, and explore the graphical represe
 ![t1 map](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountains_01.png)
 ![t1 map bg 3](https://github.com/JeyDot-dev/FdF/blob/main/screenshots/mountains_02.png)
 
-## External Functions
-- `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`
-- All functions from the math library (compile with the -lm option)
-- All functions from MiniLibX
 
-## Libft
-Libft functions are authorized for use.
-
-Enjoy exploring and visualizing landscapes with FDF!
+Thanks for checking my version of FDF !
